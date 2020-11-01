@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Cards</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body ondragstart="return false"></body>
+<script src="main.js"></script>
+<script>
+(function(){
+    const spans = Array.from(document.querySelectorAll('span'));
+
+    for(let x = 0; x<spans.length; x++) {
+        spans[x].onclick=function() {
+            var el = spans[x];
+            var range = document.createRange();
+            range.selectNodeContents(el);
+            var sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+            document.execCommand("Copy");
+
+            spans[x].style.backgroundColor="rgba(255, 255, 255, 0.3)";
+            setTimeout(()=>{
+                spans[x].style.backgroundColor="rgba(255, 255, 255, 0.1)"
+            }, 150)
+        }
+    }
+}());
+</script>
+</html>
